@@ -1,32 +1,119 @@
-<!-- 🟢 PANTALLA 6: FINAL -->
-<div id="screen-final" class="screen">
+<script>
+function goTo(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 
-  <h2>La Caja se Abre</h2>
-  <div class="zellige-line"></div>
+  if(id === "screen-test3"){ resetLight(); }
+  if(id === "screen-final"){ resetAnimations(); }
+}
 
-  <div class="reveal-glow"></div>
+/* --- PRUEBA 1: OBJETOS --- */
+function test1(el){
+  const item = el.dataset.item;
+  let frase = "";
 
-  <div class="final-box">
-      <div class="lid"></div>
+  if(item === "te")
+    frase = "“La tetera marroquí guarda el arte de la paciencia y la hospitalidad.”";
 
-      <!-- TARJETA FÍSICA QUE SE ELEVA -->
-      <div class="card-fly">Viaje a<br>Marruecos</div>
+  if(item === "minarete")
+    frase = "“El minarete guía a los viajeros cuando la noche oculta los caminos.”";
 
-      <div class="final-card-text" style="position:relative; z-index:5; margin-top:20px; text-align:center;">
-          <h2 style="margin-bottom:6px;">🎉 ¡Feliz cumpleaños! 🎉</h2>
-          <p>Dentro de la caja encuentras una sorpresa:</p>
-          <p style="font-weight:700; margin-top:6px; font-size:1.3rem;">
-              🧳 Un viaje a Marruecos 🧳
-          </p>
-          <p class="small" style="font-style:italic;">
-              “Quien sigue la luz del desierto merece descubrir nuevos horizontes.”
-          </p>
-      </div>
-  </div>
+  if(item === "artesano")
+    frase = "“Los artesanos del cobre esculpen historias con cada golpe.”";
 
-  <div class="camel-container">
-      <div class="camel">🐪</div>
-  </div>
+  if(item === "camello")
+    frase = "“El camello es el guardián del desierto… sin él, no hay travesía posible.”";
 
-  <button class="btn" onclick="restart()">Ver la sorpresa de nuevo</button>
-</div>
+  document.getElementById("msg1").textContent = frase;
+
+  setTimeout(()=>goTo('screen-test2'), 3000);
+}
+
+/* --- PRUEBA 2: COLORES --- */
+let colors = new Set();
+
+function colorClick(el){
+  const c = el.dataset.color;
+  let msg = "";
+
+  if(!colors.has(c)){
+    colors.add(c);
+    el.classList.add("clicked");
+
+    if(c === "azul")
+      msg = "“El azul Majorelle protege del mal de ojo y calma el alma.”";
+
+    if(c === "ocre")
+      msg = "“El ocre es el color de las dunas eternas y de las kasbahs antiguas.”";
+
+    if(c === "verde")
+      msg = "“El verde del zellige simboliza vida, paz y renacimiento.”";
+
+    document.getElementById("msg2").textContent = msg;
+  }
+
+  if(colors.size === 3){
+    setTimeout(()=>{
+      document.getElementById("msg2").textContent =
+      "“Has unido los colores del alma marroquí.”";
+      setTimeout(()=>goTo('screen-test3'),3000);
+    },600);
+  }
+}
+
+/* --- PRUEBA 3: SEGUIR LA LUZ --- */
+let clicks = 0;
+
+function resetLight(){
+  const light = document.getElementById("light");
+  const area = document.getElementById("desert-area");
+  const r = area.getBoundingClientRect();
+
+  const x = Math.random()*(r.width-40)+10;
+  const y = Math.random()*(r.height-40)+10;
+
+  light.style.left = x+"px";
+  light.style.top = y+"px";
+}
+
+function lightClick(){
+  clicks++;
+  if(clicks < 3){
+    document.getElementById("msg3").textContent =
+      `“Has seguido la luz ${clicks} vez${clicks>1?"es":""}…”`;
+    resetLight();
+  } else {
+    document.getElementById("msg3").textContent =
+      "“La luz te guía al destino final…”";
+    setTimeout(()=>goTo('screen-final'), 3000);
+  }
+}
+
+/* --- FINAL: REINICIAR ANIMACIONES --- */
+function resetAnimations(){
+  document.querySelectorAll('.card-fly, .final-box, .camel')
+  .forEach(el=>{
+    el.style.animation="none";
+    void el.offsetWidth;
+    el.style.animation="";
+  });
+}
+
+/* --- REINICIAR JUEGO COMPLETO --- */
+function restart(){
+  colors.clear();
+  clicks = 0;
+
+  document.querySelectorAll('.color-box')
+  .forEach(b=>b.classList.remove('clicked'));
+
+  document.getElementById("msg1").textContent = "";
+  document.getElementById("msg2").textContent = "";
+  document.getElementById("msg3").textContent = "";
+
+  goTo("screen-intro");
+}
+</script>
+
+</body>
+</html>
