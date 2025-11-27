@@ -5,20 +5,15 @@
   <title>El Secreto del Zoco de las Estrellas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- TIPOGRAFÍAS ÁRABES / MÍSTICAS -->
-  <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;600&family=Scheherazade+New:wght@700&display=swap" rel="stylesheet">
+  <!-- Tipografía árabe/mística -->
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'El Messiri', sans-serif;
-    }
-
-    h1, h2 {
-      font-family: 'Scheherazade New', serif;
-      letter-spacing: 0.5px;
+      font-family: "Scheherazade New", serif;
     }
 
     body {
@@ -46,8 +41,47 @@
       overflow: hidden;
     }
 
-    .screen { display: none; }
-    .screen.active { display: block; }
+    h1, h2, h3 {
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      margin-bottom: 10px;
+      line-height: 1.5;
+      font-size: 1.1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ffce54, #f6a623);
+      color: #3a1800;
+      font-weight: 700;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+      width: 100%;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      transform: scale(1.03);
+    }
+
+    .screen {
+      display: none;
+    }
+    .screen.active {
+      display: block;
+    }
 
     .zellige-line {
       height: 8px;
@@ -59,215 +93,140 @@
         linear-gradient(45deg, transparent 75%, #ffddd2 75%),
         linear-gradient(-45deg, transparent 75%, #83c5be 75%);
       background-size: 14px 14px;
+      opacity: 0.85;
     }
 
-    .btn {
-      margin-top: 14px;
-      padding: 10px 18px;
-      border-radius: 999px;
-      border: none;
-      font-size: 1.1rem;
-      cursor: pointer;
-      background: linear-gradient(135deg, #ffce54, #f6a623);
-      color: #3a1800;
-      font-weight: 600;
-      width: 100%;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.45);
-    }
-
-    .small {
-      font-size: 0.9rem;
-      opacity: 0.9;
-      text-align: center;
-    }
-
-    /* Caja cerrada */
-    .box-locked {
-      margin: 16px auto;
-      width: 140px;
-      height: 80px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #b08d57, #f0c878);
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
-    }
-
-    .locks {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .lock {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 2px solid #3b2203;
-      background: rgba(255,255,255,0.1);
-    }
-
-    .lock.open {
-      background: #8bc34a;
-      box-shadow: 0 0 8px rgba(139,195,74,0.8);
-    }
-
-    /* Prueba 1 */
+    /* OBJETOS */
     .objects-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
-      margin-top: 12px;
+      margin-top: 14px;
     }
 
     .object-card {
-      padding: 16px;
-      border-radius: 12px;
-      background: rgba(34,23,43,0.85);
-      cursor: pointer;
-      border: 1px solid rgba(255,215,0,0.2);
+      border-radius: 14px;
+      padding: 18px;
+      background: rgba(44, 29, 55, 0.85);
+      border: 1px solid rgba(255, 215, 0, 0.3);
       text-align: center;
+      cursor: pointer;
       transition: 0.2s;
     }
 
     .object-card span {
       font-size: 2rem;
       display: block;
-      margin-bottom: 6px;
     }
 
-    /* Prueba 2 */
+    .object-card:hover {
+      transform: scale(1.06);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+    }
+
+    /* COLORES */
     .colors-row {
       display: flex;
-      gap: 10px;
-      margin-top: 12px;
+      gap: 12px;
+      margin-top: 18px;
+      flex-wrap: wrap;
     }
 
     .color-box {
       flex: 1;
-      height: 70px;
-      border-radius: 12px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
+      min-width: 90px;
+      height: 80px;
+      border-radius: 14px;
+      padding: 8px;
       cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.4);
-      padding-bottom: 6px;
-      font-size: 0.9rem;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      transition: 0.2s;
     }
 
-    .color-azul { background: linear-gradient(135deg,#1a4f7a,#1e88e5); }
-    .color-ocre { background: linear-gradient(135deg,#bf8b3b,#ffb74d); }
-    .color-verde { background: linear-gradient(135deg,#00796b,#26a69a); }
+    .color-box.clicked {
+      transform: scale(0.95);
+      opacity: 0.7;
+      outline: 3px solid #ffd54f;
+    }
 
-    /* Prueba 3 */
+    .color-azul { background: linear-gradient(135deg, #1a4f7a, #1e88e5); }
+    .color-ocre { background: linear-gradient(135deg, #bf8b3b, #ffb74d); }
+    .color-verde { background: linear-gradient(135deg, #00796b, #26a69a); }
+
+    /* DESIERTO */
     .desert-area {
-      height: 190px;
+      margin-top: 14px;
       border-radius: 18px;
+      height: 200px;
       background: linear-gradient(to top, #c96f28 0%, #f4a261 40%, #26163b 40%, #1d2a3a 100%);
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(255,215,0,0.25);
-    }
-
-    .stars {
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.8) 0, transparent 40%),
-        radial-gradient(circle at 80% 30%, rgba(255,255,255,0.75) 0, transparent 40%),
-        radial-gradient(circle at 60% 60%, rgba(255,255,255,0.7) 0, transparent 40%);
-      opacity: .45;
-    }
-
-    .dune {
-      position: absolute;
-      bottom: 0;
-      width: 200%;
-      height: 60px;
-      background: linear-gradient(to right,#d38b3c,#e9c46a,#d38b3c);
-      opacity: 0.7;
-      border-radius: 50% 50% 0 0;
+      border: 1px solid rgba(255, 215, 0, 0.25);
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.7);
     }
 
     .light {
       position: absolute;
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
-      background: radial-gradient(circle,#ffe082 0%,#ffc107 40%,transparent 70%);
+      background: radial-gradient(circle, #ffe082 0%, #ffc107 40%, rgba(255,193,7,0) 70%);
       box-shadow: 0 0 12px rgba(255,241,118,0.9);
       cursor: pointer;
       display: flex;
-      align-items: center;
       justify-content: center;
-      font-size: .9rem;
+      align-items: center;
+      font-size: 0.8rem;
       font-weight: bold;
+      color: #4e342e;
     }
 
-    /* FINAL: Caja animada */
+    /* FINAL: Caja + Tarjeta + Camello */
     .final-box {
-      position: relative;
-      max-width: 260px;
-      margin: 20px auto;
-      padding: 16px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #f9f0d7, #f5e1a4);
-      color: #3b2714;
-      text-align: center;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
-      overflow: hidden;
-      transform: scale(0.9);
-      opacity: 0;
-      animation: box-appear 1.2s ease forwards;
-    }
-
-    @keyframes box-appear {
-      0% { transform: scale(0.7); opacity: 0; filter: brightness(0.5); }
-      70% { transform: scale(1.03); opacity: 1; filter: brightness(1.4); }
-      100% { transform: scale(1); opacity: 1; filter: brightness(1); }
-    }
-
-    .lid {
-      position: absolute;
-      width: 120%;
-      height: 50%;
-      top: 0;
-      left: -10%;
-      background: linear-gradient(135deg, #e4c88f, #c19a56);
-      border-bottom: 3px solid #7a5a32;
+      margin: 16px auto;
+      width: 260px;
+      height: 180px;
+      padding-top: 70px;
+      background: #f5e4b0;
       border-radius: 14px;
+      border: 3px solid #b58a3c;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 18px rgba(255,215,0,0.3);
       transform-origin: top;
-      transform: rotateX(0deg);
-      animation: lid-open 1.8s ease forwards;
-      animation-delay: 0.4s;
+      animation: box-open 1.5s ease-out forwards;
     }
 
-    @keyframes lid-open {
-      0% { transform: rotateX(0deg); }
-      100% { transform: rotateX(75deg) translateY(-8px); }
+    @keyframes box-open {
+      0% { transform: rotateX(90deg); opacity: 0; }
+      100% { transform: rotateX(0deg); opacity: 1; }
     }
 
-    /* TARJETA QUE SE ELEVA */
     .card-fly {
       position: absolute;
       width: 180px;
       height: 110px;
       left: 50%;
       top: 55%;
-      transform: translateX(-50%) translateY(20px) scale(0.9);
+      transform: translateX(-50%) translateY(40px) scale(0.8);
       background: #ffffff;
-      border-radius: 10px;
+      border-radius: 12px;
       border: 3px solid #d4a74d;
       box-shadow: 0 6px 14px rgba(0,0,0,0.4);
       text-align: center;
       padding-top: 18px;
-      font-size: 1.1rem;
-      font-weight: 600;
+      font-size: 1.2rem;
+      font-weight: 700;
       color: #5a4318;
       opacity: 0;
-      z-index: 10;
-
       animation: card-rise 2s ease-out forwards;
-      animation-delay: 1.7s;
+      animation-delay: 1.2s;
     }
 
     @keyframes card-rise {
@@ -285,47 +244,6 @@
       }
     }
 
-    .card-fly::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg,
-        rgba(255,255,255,0.0) 0%,
-        rgba(255,255,255,0.4) 40%,
-        rgba(255,255,255,0.0) 80%
-      );
-      border-radius: 10px;
-      opacity: 0;
-      animation: card-shine 2s ease-in-out forwards;
-      animation-delay: 2.3s;
-    }
-
-    @keyframes card-shine {
-      0% { opacity: 0; }
-      50% { opacity: 0.7; }
-      100% { opacity: 0.15; }
-    }
-
-    /* Brillo global */
-    .reveal-glow {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at center,
-        rgba(255, 220, 120, 0.25),
-        rgba(255, 220, 120, 0.15),
-        transparent 70%
-      );
-      pointer-events: none;
-      opacity: 0;
-      animation: glow-reveal 2.8s ease forwards;
-    }
-
-    @keyframes glow-reveal {
-      0% { opacity: 0; }
-      50% { opacity: 1; }
-      100% { opacity: 0.3; }
-    }
-
     .camel-container {
       margin-top: 20px;
       height: 80px;
@@ -338,7 +256,7 @@
       left: -80px;
       bottom: 0;
       font-size: 3.2rem;
-      animation: camel-walk 7s linear forwards, camel-bob 1s ease-in-out infinite;
+      animation: camel-walk 7s linear forwards, camel-bob 1s infinite ease-in-out;
     }
 
     @keyframes camel-walk {
@@ -350,241 +268,266 @@
       0%,100% { transform: translateY(0); }
       50% { transform: translateY(-4px); }
     }
+
   </style>
 </head>
-
 <body>
   <div class="game-container">
     <div class="card">
 
-      <!-- INTRO -->
+      <!-- 🟣 PANTALLA 1: INTRO -->
       <div id="screen-intro" class="screen active">
         <h1>El Secreto del Zoco de las Estrellas</h1>
         <div class="zellige-line"></div>
-        <p class="small">En la noche de tu cumpleaños, un mensaje aparece sin explicación…</p>
-        <p class="small" style="font-style:italic;">
-          “Quien siga la luz del desierto encontrará un regalo reservado para su destino.”
+
+        <p>
+          En una noche silenciosa, mientras las estrellas vigilan el cielo, recibes un mensaje sin remitente.
         </p>
-        <button class="btn" onclick="goTo('screen-story')">Comenzar</button>
+
+        <p style="font-style: italic; text-align:center;">
+          “Quien siga la luz del desierto, hallará un regalo nacido del destino.”
+        </p>
+
+        <button class="btn" onclick="goTo('screen-story')">Entrar en el zoco</button>
       </div>
 
-      <!-- HISTORIA -->
+      <!-- 🟠 PANTALLA 2: HISTORIA CON MERCADER -->
       <div id="screen-story" class="screen">
         <h2>El Mercader de las Estrellas</h2>
         <div class="zellige-line"></div>
-        <p class="small">
-          Abres los ojos y estás en un zoco marroquí. El aire huele a especias. Un mercader de barba blanca
-          te mira y sonríe.
-        </p>
-        <p class="small" style="font-style:italic; margin-top:8px;">
-          “Te estaba esperando. Esta caja contiene aquello que tu alma anhela.
-          Pero su secreto solo se revela a quien supera tres pruebas antiguas…”
+
+        <p>
+          Caminas entre farolillos y especias. Un mercader anciano te mira como si te hubiera estado esperando desde siempre.
         </p>
 
-        <div class="box-locked"></div>
-        <div class="locks">
-          <div id="lock1" class="lock"></div>
-          <div id="lock2" class="lock"></div>
-          <div id="lock3" class="lock"></div>
-        </div>
+        <p style="font-style: italic; font-size:1.15rem;">
+          “He viajado por dunas, montañas y mares… y sé cuándo un corazón está listo para escuchar su destino.”
+        </p>
 
-        <button class="btn" onclick="goTo('screen-test1')">Primera prueba</button>
+        <p>
+          Te entrega una pequeña caja con <strong>tres cerraduras</strong>.
+        </p>
+
+        <p style="font-style: italic;">
+          “Solo quien supera tres pruebas de mi tierra podrá abrirla. Pero no temas… las estrellas caminan contigo.”
+        </p>
+
+        <button class="btn" onclick="goTo('screen-test1')">Comenzar la primera prueba</button>
       </div>
 
-      <!-- PRUEBA 1 -->
+      <!-- 🔵 PANTALLA 3: PRUEBA 1 -->
       <div id="screen-test1" class="screen">
         <h2>Prueba 1: El Zoco de los Ecos</h2>
         <div class="zellige-line"></div>
-        <p class="small"><strong>Instrucciones:</strong> Elige uno de los objetos. El mercader dice:</p>
-        <p class="small" style="font-style:italic;">“Los objetos hablan. Escoge aquel cuyo eco resuene contigo.”</p>
+
+        <p>
+          Elige un objeto del zoco. Cada uno guarda un secreto, una historia, una parte del viaje…
+        </p>
+
+        <p class="small">El mercader susurra: “Tu elección revela más de lo que imaginas.”</p>
 
         <div class="objects-grid">
-          <div class="object-card" onclick="test1()">
-            <span>🍵</span><p>Tetera de menta</p>
+          <div class="object-card" data-item="te" onclick="test1(this)">
+            <span>🍵</span>
+            <p>Tetera de menta</p>
           </div>
-          <div class="object-card" onclick="test1()">
-            <span>🕌</span><p>Minarete</p>
+
+          <div class="object-card" data-item="minarete" onclick="test1(this)">
+            <span>🕌</span>
+            <p>Minarete</p>
           </div>
-          <div class="object-card" onclick="test1()">
-            <span>🛠️</span><p>Artesano</p>
+
+          <div class="object-card" data-item="artesano" onclick="test1(this)">
+            <span>🛠️</span>
+            <p>Artesano</p>
           </div>
-          <div class="object-card" onclick="test1()">
-            <span>🐪</span><p>Camello</p>
+
+          <div class="object-card" data-item="camello" onclick="test1(this)">
+            <span>🐪</span>
+            <p>Camello</p>
           </div>
         </div>
 
-        <p id="msg1" class="small"></p>
+        <p id="msg1" style="margin-top:12px; text-align:center; font-style:italic;"></p>
       </div>
 
-      <!-- PRUEBA 2 -->
+      <!-- 🟡 PANTALLA 4: PRUEBA 2 -->
       <div id="screen-test2" class="screen">
         <h2>Prueba 2: Los Colores de Marruecos</h2>
         <div class="zellige-line"></div>
 
-        <p class="small"><strong>Instrucciones:</strong> Toca cada color una vez.</p>
-        <p class="small" style="font-style:italic;">
-          “Cada color cuenta una historia. Juntos revelan caminos antiguos…”
+        <p>
+          Toca los tres colores. Cada uno esconde un fragmento de la historia de Marruecos.
         </p>
 
         <div class="colors-row">
-          <div class="color-box color-azul" data-color="azul" onclick="colorClick(this)">Azul Majorelle</div>
-          <div class="color-box color-ocre" data-color="ocre" onclick="colorClick(this)">Ocre</div>
-          <div class="color-box color-verde" data-color="verde" onclick="colorClick(this)">Zellige verde</div>
+          <div class="color-box color-azul" data-color="azul" onclick="colorClick(this)">
+            Azul Majorelle
+          </div>
+          <div class="color-box color-ocre" data-color="ocre" onclick="colorClick(this)">
+            Ocre del Desierto
+          </div>
+          <div class="color-box color-verde" data-color="verde" onclick="colorClick(this)">
+            Verde de Zellige
+          </div>
         </div>
 
-        <p id="msg2" class="small"></p>
+        <p id="msg2" style="margin-top:12px; text-align:center; font-style:italic;"></p>
       </div>
 
-      <!-- PRUEBA 3 -->
+      <!-- 🟤 PANTALLA 5: PRUEBA 3 -->
       <div id="screen-test3" class="screen">
         <h2>Prueba 3: Las Dunas del Sueño</h2>
         <div class="zellige-line"></div>
-        <p class="small"><strong>Instrucciones:</strong> Toca la luz 3 veces.</p>
-        <p class="small" style="font-style:italic;">
-          “Sigue la luz, como lo hacen los viajeros del desierto…”
+
+        <p>
+          Toca la luz dorada cuando se detenga. Síguela tres veces… ella conoce el camino.
         </p>
 
-        <div id="desert-area" class="desert-area">
-          <div class="stars"></div>
-          <div class="dune"></div>
-          <div id="light" class="light" onclick="lightClick()">★</div>
+        <div class="desert-area" id="desert-area">
+          <div class="light" id="light" onclick="lightClick()">★</div>
         </div>
 
-        <p id="msg3" class="small"></p>
+        <p id="msg3" style="margin-top:12px; text-align:center; font-style:italic;"></p>
       </div>
 
-      <!-- FINAL -->
+      <!-- 🟢 PANTALLA 6: FINAL -->
       <div id="screen-final" class="screen">
-        <div class="reveal-glow"></div>
-
         <h2>La Caja se Abre</h2>
         <div class="zellige-line"></div>
 
-        <p class="small">Un destello dorado inunda el aire…</p>
-
         <div class="final-box">
-          <div class="lid"></div>
-
-          <!-- TARJETA FÍSICA QUE SE ELEVA -->
           <div class="card-fly">Viaje a<br>Marruecos</div>
-
-          <div class="final-card-text">
-            <h2 style="margin-top:20px;">🎉 ¡Feliz cumpleaños! 🎉</h2>
-            <p>Dentro de la caja encuentras una sorpresa:</p>
-            <p style="font-weight:700; margin-top:6px; font-size:1.3rem;">
-              🧳 Un viaje a Marruecos 🧳
-            </p>
-            <p class="small" style="font-style:italic;">
-              “Quien sigue la luz del desierto merece descubrir nuevos horizontes.”
-            </p>
-          </div>
         </div>
 
         <div class="camel-container">
           <div class="camel">🐪</div>
         </div>
 
-        <button class="btn" onclick="restart()">Ver la sorpresa otra vez</button>
+        <p style="text-align:center; margin-top:20px; font-style:italic; font-size:1.2rem;">
+          “El verdadero destino no se revela… se siente.”
+        </p>
+
+        <button class="btn" onclick="restart()">Ver la sorpresa de nuevo</button>
       </div>
 
     </div>
   </div>
-
 <script>
-function goTo(id) {
+function goTo(id){
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  const screen = document.getElementById(id);
-  screen.classList.add('active');
+  document.getElementById(id).classList.add('active');
 
-  if(id === "screen-test3"){
-    resetLightPosition();
-  }
-
-  /* Reiniciar animaciones finales */
-  if(id === "screen-final"){
-    const elements = [
-      ".final-box", ".lid", ".reveal-glow", ".card-fly"
-    ];
-    elements.forEach(sel=>{
-      const el = screen.querySelector(sel);
-      if(el){
-        el.style.animation = "none";
-        void el.offsetWidth;
-        el.style.animation = "";
-      }
-    });
-  }
+  if(id === "screen-test3"){ resetLight(); }
+  if(id === "screen-final"){ resetAnimations(); }
 }
 
-/* Prueba 1 */
-function test1(){
-  document.getElementById("lock1").classList.add("open");
-  document.getElementById("msg1").textContent =
-    "“Has escuchado el eco del zoco… donde cada sonido es una puerta.”";
-  setTimeout(()=>goTo("screen-test2"),1200);
+/* --- PRUEBA 1: OBJETOS --- */
+function test1(el){
+  const item = el.dataset.item;
+  let frase = "";
+
+  if(item === "te")
+    frase = "“La tetera marroquí guarda el arte de la paciencia y la hospitalidad.”";
+
+  if(item === "minarete")
+    frase = "“El minarete guía a los viajeros cuando la noche oculta los caminos.”";
+
+  if(item === "artesano")
+    frase = "“Los artesanos del cobre esculpen historias con cada golpe.”";
+
+  if(item === "camello")
+    frase = "“El camello es el guardián del desierto… sin él, no hay travesía posible.”";
+
+  document.getElementById("msg1").textContent = frase;
+
+  setTimeout(()=>goTo('screen-test2'), 1700);
 }
 
-/* Prueba 2 */
+/* --- PRUEBA 2: COLORES --- */
 let colors = new Set();
+
 function colorClick(el){
-  const color = el.dataset.color;
-  if(!colors.has(color)){
-    colors.add(color);
-    el.style.opacity = .7;
+  const c = el.dataset.color;
+  let msg = "";
+
+  if(!colors.has(c)){
+    colors.add(c);
+    el.classList.add("clicked");
+
+    if(c === "azul")
+      msg = "“El azul Majorelle protege del mal de ojo y calma el alma.”";
+
+    if(c === "ocre")
+      msg = "“El ocre es el color de las dunas eternas y de las kasbahs antiguas.”";
+
+    if(c === "verde")
+      msg = "“El verde del zellige simboliza vida, paz y renacimiento.”";
+
+    document.getElementById("msg2").textContent = msg;
   }
+
   if(colors.size === 3){
-    document.getElementById("lock2").classList.add("open");
-    document.getElementById("msg2").textContent =
-      "“Los colores hablan de patios azules, dunas doradas y mosaicos eternos…”";
-    setTimeout(()=>goTo("screen-test3"),1200);
-  } else {
-    document.getElementById("msg2").textContent = "Sigue tocando colores…";
+    setTimeout(()=>{
+      document.getElementById("msg2").textContent =
+      "“Has unido los colores del alma marroquí.”";
+      setTimeout(()=>goTo('screen-test3'),1200);
+    },600);
   }
 }
 
-/* Prueba 3 */
-let lightCount = 0;
-function resetLightPosition(){
-  const area=document.getElementById("desert-area");
-  const light=document.getElementById("light");
-  const r=area.getBoundingClientRect();
-  const x=Math.random()*(r.width-40)+10;
-  const y=Math.random()*(r.height-40)+10;
-  light.style.left=x+"px";
-  light.style.top=y+"px";
+/* --- PRUEBA 3: SEGUIR LA LUZ --- */
+let clicks = 0;
+
+function resetLight(){
+  const light = document.getElementById("light");
+  const area = document.getElementById("desert-area");
+  const r = area.getBoundingClientRect();
+
+  const x = Math.random()*(r.width-40)+10;
+  const y = Math.random()*(r.height-40)+10;
+
+  light.style.left = x+"px";
+  light.style.top = y+"px";
 }
 
 function lightClick(){
-  lightCount++;
-  if(lightCount < 3){
+  clicks++;
+  if(clicks < 3){
     document.getElementById("msg3").textContent =
-      "“Has seguido la luz… como lo hacen los viajeros del desierto.”";
-    resetLightPosition();
+      `“Has seguido la luz ${clicks} vez${clicks>1?"es":""}…”`;
+    resetLight();
   } else {
-    document.getElementById("lock3").classList.add("open");
     document.getElementById("msg3").textContent =
-      "“Has cruzado las dunas… solo queda revelar el destino.”";
-    setTimeout(()=>goTo("screen-final"),1200);
+      "“La luz te guía al destino final…”";
+    setTimeout(()=>goTo('screen-final'), 1500);
   }
 }
 
-/* Reinicio */
+/* --- FINAL: REINICIAR ANIMACIONES --- */
+function resetAnimations(){
+  document.querySelectorAll('.card-fly, .final-box, .camel')
+  .forEach(el=>{
+    el.style.animation="none";
+    void el.offsetWidth;
+    el.style.animation="";
+  });
+}
+
+/* --- REINICIAR JUEGO COMPLETO --- */
 function restart(){
   colors.clear();
-  lightCount=0;
+  clicks = 0;
 
-  document.querySelectorAll('.color-box').forEach(box => box.style.opacity = 1);
-  document.querySelectorAll('.lock').forEach(lock => lock.classList.remove('open'));
+  document.querySelectorAll('.color-box')
+  .forEach(b=>b.classList.remove('clicked'));
 
   document.getElementById("msg1").textContent = "";
   document.getElementById("msg2").textContent = "";
   document.getElementById("msg3").textContent = "";
 
   goTo("screen-intro");
-  resetLightPosition();
 }
-
-window.onload = resetLightPosition;
 </script>
 
 </body>
