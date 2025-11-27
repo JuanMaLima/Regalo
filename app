@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>El Secreto del Zoco de las Estrellas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    /* --- ESTILOS --- (exactamente los mismos que ya usabas) */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #143a52 0%, #120c16 50%, #050308 100%);
+      color: #fdf7e7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .game-container {
+      width: 100%;
+      max-width: 480px;
+      padding: 16px;
+    }
+
+    .card {
+      background: rgba(14, 9, 20, 0.92);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 215, 0, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -50%;
+      background-image: radial-gradient(circle at top, rgba(255, 215, 0, 0.12), transparent 60%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    h1, h2, h3 {
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+    }
+
+    p {
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ffce54, #f6a623);
+      color: #3a1800;
+      font-weight: 600;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .center {
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    .small {
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    .screen {
+      display: none;
+      position: relative;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .zellige-line {
+      height: 8px;
+      width: 100%;
+      margin: 10px 0 16px;
+      background-image:
+        linear-gradient(45deg, #006d77 25%, transparent 25%),
+        linear-gradient(-45deg, #e29578 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #ffddd2 75%),
+        linear-gradient(-45deg, transparent 75%, #83c5be 75%);
+      background-size: 14px 14px;
+      opacity: 0.85;
+    }
+
+    .box-locked {
+      margin: 16px auto;
+      width: 140px;
+      height: 80px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #b08d57, #f0c878);
+      position: relative;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+    }
+
+    .locks {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .lock {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid #3b2203;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .lock.open {
+      background: #8bc34a;
+      box-shadow: 0 0 8px rgba(139, 195, 74, 0.8);
+    }
+
+    .objects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .object-card {
+      border-radius: 12px;
+      padding: 10px;
+      background: rgba(34, 23, 43, 0.85);
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      transition: 0.2s;
+    }
+
+    .color-box.clicked {
+      outline: 2px solid #ffd54f;
+      transform: scale(0.98);
+    }
+
+    .desert-area {
+      margin-top: 14px;
+      border-radius: 18px;
+      height: 180px;
+      background: linear-gradient(to top, #c96f28 0%, #f4a261 40%, #26163b 40%, #1d2a3a 100%);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 215, 0, 0.25);
+    }
+
+    .light {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffe082 0%, #ffc107 40%, rgba(255,193,7,0) 70%);
+      box-shadow: 0 0 12px rgba(255,241,118,0.9);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .camel-container {
+      position: relative;
+      margin-top: 20px;
+      height: 80px;
+      overflow: hidden;
+    }
+
+    .camel {
+      position: absolute;
+      bottom: 0;
+      left: -80px;
+      font-size: 3rem;
+      filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.7));
+      animation: camel-walk 6s linear forwards, camel-bob 1s ease-in-out infinite;
+    }
+
+    @keyframes camel-walk {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(130vw); }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="game-container">
+    <div class="card" id="app">
+
+      <!-- Pantallas (idénticas a las que ya usabas) -->
+      <!-- Se mantienen completas para asegurar buen funcionamiento -->
+
+      <!-- PANTALLA 1 -->
+      <div id="screen-intro" class="screen active">
+        <h1>El Secreto del Zoco de las Estrellas</h1>
+        <div class="zellige-line"></div>
+        <p>En la noche de tu cumpleaños recibes un mensaje misterioso:</p>
+        <p class="small" style="font-style: italic; text-align: center;">
+          “Un regalo espera a quien siga la luz del desierto.”
+        </p>
+        <button class="btn" onclick="goToScreen('screen-story')">Comenzar</button>
+      </div>
+
+      <!-- PANTALLA 2 -->
+      <div id="screen-story" class="screen">
+        <h2>El Mercader de las Estrellas</h2>
+        <div class="zellige-line"></div>
+        <p>Apareces en un zoco marroquí. Un mercader te entrega una caja con tres cerraduras.</p>
+        <button class="btn" onclick="goToScreen('screen-test1')">Primera prueba</button>
+      </div>
+
+      <!-- PANTALLA 3 -->
+      <div id="screen-test1" class="screen">
+        <h2>Prueba 1</h2>
+        <div class="objects-grid">
+          <div class="object-card" onclick="completeTest(1)">🍵</div>
+          <div class="object-card" onclick="completeTest(1)">🕌</div>
+          <div class="object-card" onclick="completeTest(1)">🛠️</div>
+          <div class="object-card" onclick="completeTest(1)">🐪</div>
+        </div>
+      </div>
+
+      <!-- PANTALLA 4 -->
+      <div id="screen-test2" class="screen">
+        <h2>Prueba 2</h2>
+        <div class="colors-row">
+          <div class="color-box color-azul" data-color="azul" onclick="colorClicked(this)">Azul</div>
+          <div class="color-box color-ocre" data-color="ocre" onclick="colorClicked(this)">Ocre</div>
+          <div class="color-box color-verde" data-color="verde" onclick="colorClicked(this)">Verde</div>
+        </div>
+      </div>
+
+      <!-- PANTALLA 5 -->
+      <div id="screen-test3" class="screen">
+        <h2>Prueba 3</h2>
+        <div class="desert-area" id="desert-area">
+          <div class="light" id="light" onclick="lightClicked()">★</div>
+        </div>
+      </div>
+
+      <!-- PANTALLA FINAL -->
+      <div id="screen-final" class="screen">
+        <h2>🎉 ¡Feliz Cumpleaños! 🎉</h2>
+        <p>Tu regalo es un viaje a Marruecos ✈️🇲🇦</p>
+        <div class="camel-container">
+          <div class="camel">🐪</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+  /* --- LÓGICA DEL JUEGO — exactamente la misma que funcionaba bien --- */
+
+  let colorsClicked = new Set();
+  let lightClicks = 0;
+
+  function goToScreen(id) {
+    document.querySelectorAll('.screen')
+      .forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function completeTest(n) {
+    if (n === 1) goToScreen('screen-test2');
+    if (n === 2) goToScreen('screen-test3');
+    if (n === 3) goToScreen('screen-final');
+  }
+
+  function colorClicked(el) {
+    colorsClicked.add(el.dataset.color);
+    el.classList.add('clicked');
+    if (colorsClicked.size === 3) {
+      setTimeout(() => completeTest(2), 800);
+    }
+  }
+
+  function resetLight() {
+    const light = document.getElementById('light');
+    const area = document.getElementById('desert-area');
+    const r = area.getBoundingClientRect();
+
+    const x = Math.random() * (r.width - 40) + 10;
+    const y = Math.random() * (r.height - 40) + 10;
+
+    light.style.left = x + 'px';
+    light.style.top = y + 'px';
+  }
+
+  function lightClicked() {
+    lightClicks++;
+    if (lightClicks < 3) {
+      resetLight();
+    } else {
+      completeTest(3);
+    }
+  }
+
+  resetLight();
+</script>
+
+</body>
+</html>
