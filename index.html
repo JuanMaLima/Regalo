@@ -440,6 +440,10 @@
       box-shadow: 0 0 18px rgba(255,215,0,0.35);
       overflow: hidden;
     }
+    #closed-box {
+      margin-top: -4px !important;   /* SUBE la caja */
+      margin-bottom: 12px !important;
+    }
 
     .lid-static {
       position: absolute;
@@ -761,7 +765,7 @@
         </p>
 
         <!-- CAJA CERRADA -->
-        <div class="final-box closed" id="closed-box" style="cursor:pointer; margin-top:18px;">
+        <div class="final-box closed" id="closed-box" style="cursor:pointer;">
           <div class="lid-static"></div>
           <p style="text-align:center; margin-top:90px; opacity:0.85; color:#3b2714;">
             (Caja cerrada)
