@@ -187,6 +187,28 @@
       color: #4e342e;
     }
 
+    /* Caja cerrada estática (antes de abrirse) */
+.closed {
+  background: linear-gradient(135deg, #d8c28a, #ba995d);
+  border: 3px solid #8a6b3b;
+  height: 180px;
+  position: relative;
+  border-radius: 14px;
+  box-shadow: 0 0 18px rgba(255,215,0,0.3);
+}
+
+.lid-static {
+  position: absolute;
+  width: 120%;
+  height: 50%;
+  top: 0;
+  left: -10%;
+  background: linear-gradient(135deg, #c9a56e, #a98247);
+  border-bottom: 3px solid #7a5a32;
+  border-radius: 14px;
+}
+
+
     /* FINAL: Caja + Tarjeta + Camello */
     .final-box {
       margin: 16px auto;
@@ -575,13 +597,26 @@ function lightClick(){
 
 /* --- FINAL: REINICIAR ANIMACIONES --- */
 function resetAnimations(){
-  document.querySelectorAll('.card-fly, .final-box, .camel')
-  .forEach(el=>{
-    el.style.animation="none";
-    void el.offsetWidth;
-    el.style.animation="";
+  const final = document.getElementById("screen-final");
+  const elements = [
+    ".final-box",
+    ".lid",
+    ".lid-static",
+    ".card-fly",
+    ".reveal-glow",
+    ".camel"
+  ];
+
+  elements.forEach(sel => {
+    const el = final.querySelector(sel);
+    if(el){
+      el.style.animation = "none";
+      void el.offsetWidth;
+      el.style.animation = "";
+    }
   });
 }
+
 
 /* --- REINICIAR JUEGO COMPLETO --- */
 function restart(){
