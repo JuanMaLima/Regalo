@@ -446,20 +446,25 @@
     Abrir la caja
   </button>
 
-  <!-- CAJA ABIERTA (INVISIBLE AL INICIO) -->
- <div id="open-box-container" style="display:none;">
+ <!-- CAJA ABIERTA (INVISIBLE AL INICIO) -->
+<div id="open-box-container" style="display:none;">
 
   <div class="reveal-glow"></div>
 
-  <div class="final-box" id="open-box">
+  <div class="final-box" id="open-box" style="display:flex; justify-content:center; align-items:center; padding-top:0;">
     <div class="lid"></div>
 
-       <div class="final-card-text" style="position:relative; z-index:5; margin-top:40px;">
+    <div class="final-card-text" style="position:relative; z-index:5; text-align:center;">
       <p style="font-weight:700; font-size:1.5rem; text-align:center; color:#000;">
         🧳 Un viaje a Marruecos 🧳
       </p>
     </div>
   </div>
+
+  <div class="camel-container">
+    <div class="camel">🐪</div>
+  </div>
+</div>
 
   <button class="btn" onclick="restart()" style="margin-top:20px;">
     Volver al inicio
@@ -520,7 +525,7 @@ function test1(el){
 
   document.getElementById("msg1").textContent = frase;
 
-  setTimeout(()=>goTo('screen-test2'), 3000);
+  setTimeout(()=>goTo('screen-test2'), 5000);
 }
 
 /* --- PRUEBA 2: COLORES --- */
@@ -549,9 +554,9 @@ function colorClick(el){
   if(colors.size === 3){
     setTimeout(()=>{
       document.getElementById("msg2").textContent =
-      "“Has unido los colores del alma marroquí.”";
+      "“Has unido los colores de la historia.”";
       setTimeout(()=>goTo('screen-test3'),3000);
-    },600);
+    },5000);
   }
 }
 
@@ -574,11 +579,11 @@ function lightClick(){
   clicks++;
   if(clicks < 3){
     document.getElementById("msg3").textContent =
-      `“Has seguido la luz ${clicks} vez${clicks>1?"es":""}…”`;
+      `“Has seguido la estrella ${clicks} vez${clicks>1?"es":""}…”`;
     resetLight();
   } else {
     document.getElementById("msg3").textContent =
-      "“La luz te guía al destino final…”";
+      "“La estrella te guía al destino final…”";
     setTimeout(()=>goTo('screen-final'), 3000);
   }
 }
