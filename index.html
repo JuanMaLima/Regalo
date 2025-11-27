@@ -5,8 +5,6 @@
   <title>El Secreto del Zoco de las Estrellas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    /* --- ESTILOS --- (exactamente los mismos que ya usabas) */
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -25,7 +23,7 @@
 
     .game-container {
       width: 100%;
-      max-width: 480px;
+      max-width: 520px;
       padding: 16px;
     }
 
@@ -44,22 +42,24 @@
       position: absolute;
       inset: -50%;
       background-image: radial-gradient(circle at top, rgba(255, 215, 0, 0.12), transparent 60%);
-      opacity: 0.9;
+      opacity: 0.7;
       pointer-events: none;
     }
 
     h1, h2, h3 {
       margin-bottom: 12px;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
-    h1 {
-      font-size: 1.6rem;
-    }
+    h1 { font-size: 1.6rem; }
 
     p {
       margin-bottom: 10px;
       line-height: 1.4;
+      position: relative;
+      z-index: 1;
     }
 
     .btn {
@@ -77,6 +77,8 @@
       transition: transform 0.1s ease, box-shadow 0.1s ease;
       width: 100%;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     .btn:active {
@@ -87,16 +89,19 @@
     .center {
       text-align: center;
       margin-top: 12px;
+      position: relative;
+      z-index: 1;
     }
 
     .small {
       font-size: 0.85rem;
-      opacity: 0.85;
+      opacity: 0.9;
     }
 
     .screen {
       display: none;
       position: relative;
+      z-index: 1;
     }
 
     .screen.active {
@@ -113,14 +118,40 @@
         linear-gradient(45deg, transparent 75%, #ffddd2 75%),
         linear-gradient(-45deg, transparent 75%, #83c5be 75%);
       background-size: 14px 14px;
-      opacity: 0.85;
+      opacity: 0.9;
+      border-radius: 999px;
     }
 
+    /* Imagen genérica por pantalla */
+    .image-block {
+      margin: 10px 0 14px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.55);
+      position: relative;
+      z-index: 1;
+    }
+
+    .image-block img {
+      width: 100%;
+      display: block;
+      height: 190px;
+      object-fit: cover;
+    }
+
+    .image-caption {
+      font-size: 0.8rem;
+      padding: 6px 10px 8px;
+      background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
+    }
+
+    /* Caja con cerraduras (solo decorativa, si quieres puedes quitarla) */
     .box-locked {
-      margin: 16px auto;
-      width: 140px;
-      height: 80px;
-      border-radius: 8px;
+      margin: 14px auto;
+      width: 150px;
+      height: 84px;
+      border-radius: 10px;
       background: linear-gradient(135deg, #b08d57, #f0c878);
       position: relative;
       box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
@@ -146,6 +177,7 @@
       box-shadow: 0 0 8px rgba(139, 195, 74, 0.8);
     }
 
+    /* Prueba 1: objetos del zoco */
     .objects-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -154,28 +186,110 @@
     }
 
     .object-card {
-      border-radius: 12px;
-      padding: 10px;
-      background: rgba(34, 23, 43, 0.85);
+      border-radius: 14px;
+      padding: 8px;
+      background: rgba(34, 23, 43, 0.9);
       text-align: center;
       cursor: pointer;
-      border: 1px solid rgba(255, 215, 0, 0.2);
-      transition: 0.2s;
+      border: 1px solid rgba(255, 215, 0, 0.25);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      overflow: hidden;
+    }
+
+    .object-card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.55);
+      background: rgba(44, 29, 55, 1);
+    }
+
+    .object-card img {
+      width: 100%;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 4px;
+    }
+
+    .object-label {
+      font-size: 0.85rem;
+    }
+
+    /* Prueba 2: colores de Marruecos */
+    .colors-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .color-box {
+      flex: 1;
+      min-width: 90px;
+      border-radius: 14px;
+      height: 80px;
+      position: relative;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 6px;
+    }
+
+    .color-box p {
+      margin: 0;
+      font-size: 0.8rem;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+      text-align: center;
+    }
+
+    .color-azul {
+      background-image:
+        linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1)),
+        url("https://source.unsplash.com/featured/?morocco,blue,chefchaouen");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .color-ocre {
+      background-image:
+        linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1)),
+        url("https://source.unsplash.com/featured/?morocco,desert,sand");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .color-verde {
+      background-image:
+        linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1)),
+        url("https://source.unsplash.com/featured/?morocco,tiles,green");
+      background-size: cover;
+      background-position: center;
     }
 
     .color-box.clicked {
       outline: 2px solid #ffd54f;
       transform: scale(0.98);
+      opacity: 0.9;
     }
 
+    /* Prueba 3: desierto */
     .desert-area {
       margin-top: 14px;
       border-radius: 18px;
-      height: 180px;
-      background: linear-gradient(to top, #c96f28 0%, #f4a261 40%, #26163b 40%, #1d2a3a 100%);
+      height: 190px;
+      background-image:
+        linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0.1)),
+        url("https://source.unsplash.com/featured/?sahara,desert,night");
+      background-size: cover;
+      background-position: center;
       position: relative;
       overflow: hidden;
       border: 1px solid rgba(255, 215, 0, 0.25);
+      box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.7);
     }
 
     .light {
@@ -189,8 +303,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      color: #4e342e;
+      font-weight: 700;
+      font-size: 0.8rem;
     }
 
+    /* Camello final */
     .camel-container {
       position: relative;
       margin-top: 20px;
@@ -204,14 +322,24 @@
       left: -80px;
       font-size: 3rem;
       filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.7));
-      animation: camel-walk 6s linear forwards, camel-bob 1s ease-in-out infinite;
+      animation: camel-walk 7s linear forwards, camel-bob 1.1s ease-in-out infinite;
     }
 
     @keyframes camel-walk {
       0% { transform: translateX(0); }
-      100% { transform: translateX(130vw); }
+      100% { transform: translateX(140vw); }
     }
 
+    @keyframes camel-bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .final-text {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -219,61 +347,144 @@
   <div class="game-container">
     <div class="card" id="app">
 
-      <!-- Pantallas (idénticas a las que ya usabas) -->
-      <!-- Se mantienen completas para asegurar buen funcionamiento -->
-
-      <!-- PANTALLA 1 -->
+      <!-- PANTALLA 1: Intro -->
       <div id="screen-intro" class="screen active">
         <h1>El Secreto del Zoco de las Estrellas</h1>
         <div class="zellige-line"></div>
-        <p>Acabas de recibir un mensaje misterioso:</p>
+
+        <div class="image-block">
+          <img src="https://source.unsplash.com/featured/?morocco,night,lanterns" alt="Zoco marroquí de noche">
+          <div class="image-caption">
+            Un zoco marroquí te espera, iluminado por farolillos.
+          </div>
+        </div>
+
+        <p>Acabas de recibir un mensaje misterioso en tu cumpleaños:</p>
         <p class="small" style="font-style: italic; text-align: center;">
           “Un regalo espera a quien siga la luz del desierto.”
         </p>
         <button class="btn" onclick="goToScreen('screen-story')">Comenzar</button>
       </div>
 
-      <!-- PANTALLA 2 -->
+      <!-- PANTALLA 2: Mercader -->
       <div id="screen-story" class="screen">
         <h2>El Mercader de las Estrellas</h2>
         <div class="zellige-line"></div>
-        <p>Cierra los ojos durante 5 segundos (1,2,3,4,5). Acabas de aparecer en un zoco. Un mercader te entrega una caja con tres cerraduras.</p>
+
+        <div class="image-block">
+          <img src="https://source.unsplash.com/featured/?morocco,merchant,market" alt="Mercader en un zoco marroquí">
+          <div class="image-caption">
+            Un mercader del zoco te observa con una sonrisa cómplice.
+          </div>
+        </div>
+
+        <p>
+          Cierra los ojos durante 5 segundos (1,2,3,4,5).  
+          Al abrirlos, estás en un zoco marroquí.  
+          El mercader te entrega una caja con <strong>tres cerraduras</strong>.
+        </p>
+
+        <div class="box-locked"></div>
+        <div class="locks">
+          <div id="lock1" class="lock"></div>
+          <div id="lock2" class="lock"></div>
+          <div id="lock3" class="lock"></div>
+        </div>
+
         <button class="btn" onclick="goToScreen('screen-test1')">Primera prueba</button>
       </div>
 
-      <!-- PANTALLA 3 -->
+      <!-- PANTALLA 3: Prueba 1 -->
       <div id="screen-test1" class="screen">
-        <h2>Prueba 1</h2>
+        <h2>Prueba 1 – El Zoco de los Ecos</h2>
+        <div class="zellige-line"></div>
+
+        <p class="small">
+          Imagina los sonidos del zoco: té hirviendo, artesanos, un camello, gente hablando...
+          Elige uno de estos recuerdos. La magia no se equivoca.
+        </p>
+
         <div class="objects-grid">
-          <div class="object-card" onclick="completeTest(1)">🍵</div>
-          <div class="object-card" onclick="completeTest(1)">🕌</div>
-          <div class="object-card" onclick="completeTest(1)">🛠️</div>
-          <div class="object-card" onclick="completeTest(1)">🐪</div>
+          <div class="object-card" onclick="completeTest(1)">
+            <img src="https://source.unsplash.com/featured/?morocco,tea" alt="Té a la menta">
+            <div class="object-label">Tetera de menta</div>
+          </div>
+          <div class="object-card" onclick="completeTest(1)">
+            <img src="https://source.unsplash.com/featured/?morocco,mosque,evening" alt="Minarete y ciudad">
+            <div class="object-label">Minarete lejano</div>
+          </div>
+          <div class="object-card" onclick="completeTest(1)">
+            <img src="https://source.unsplash.com/featured/?morocco,copper,artisan" alt="Artesano del cobre">
+            <div class="object-label">Artesano del cobre</div>
+          </div>
+          <div class="object-card" onclick="completeTest(1)">
+            <img src="https://source.unsplash.com/featured/?camel,desert" alt="Camello en el desierto">
+            <div class="object-label">Camello del zoco</div>
+          </div>
         </div>
+
+        <div class="center small" id="test1-msg"></div>
       </div>
 
-      <!-- PANTALLA 4 -->
+      <!-- PANTALLA 4: Prueba 2 -->
       <div id="screen-test2" class="screen">
-        <h2>Prueba 2</h2>
+        <h2>Prueba 2 – Los Colores de Marruecos</h2>
+        <div class="zellige-line"></div>
+
+        <p class="small">
+          Piensa en los colores de Marruecos: el <strong>azul</strong> de los patios,  
+          el <strong>ocre</strong> del desierto y el <strong>verde</strong> de los mosaicos.
+          Toca cada color una vez.
+        </p>
+
         <div class="colors-row">
-          <div class="color-box color-azul" data-color="azul" onclick="colorClicked(this)">Azul</div>
-          <div class="color-box color-ocre" data-color="ocre" onclick="colorClicked(this)">Ocre</div>
-          <div class="color-box color-verde" data-color="verde" onclick="colorClicked(this)">Verde</div>
+          <div class="color-box color-azul" data-color="azul" onclick="colorClicked(this)">
+            <p>Azul de los patios</p>
+          </div>
+          <div class="color-box color-ocre" data-color="ocre" onclick="colorClicked(this)">
+            <p>Ocre del desierto</p>
+          </div>
+          <div class="color-box color-verde" data-color="verde" onclick="colorClicked(this)">
+            <p>Verde de zellige</p>
+          </div>
         </div>
+
+        <div class="center small" id="test2-msg"></div>
       </div>
 
-      <!-- PANTALLA 5 -->
+      <!-- PANTALLA 5: Prueba 3 -->
       <div id="screen-test3" class="screen">
-        <h2>Prueba 3</h2>
+        <h2>Prueba 3 – Las Dunas del Sueño</h2>
+        <div class="zellige-line"></div>
+
+        <p class="small">
+          Una pequeña luz dorada aparece entre las dunas del Sahara.  
+          Tócala <strong>tres veces</strong> para seguirla a través del desierto.
+        </p>
+
         <div class="desert-area" id="desert-area">
           <div class="light" id="light" onclick="lightClicked()">★</div>
         </div>
+
+        <div class="center small" id="test3-msg"></div>
       </div>
 
       <!-- PANTALLA FINAL -->
       <div id="screen-final" class="screen">
         <h2>🎉 ¡Feliz Cumpleaños, habibti! 🎉</h2>
-        <p>Tu regalo es un viaje a Marruecos ✈️🇲🇦</p>
+        <div class="zellige-line"></div>
+
+        <div class="image-block">
+          <img src="https://source.unsplash.com/featured/?morocco,travel" alt="Viaje por Marruecos">
+          <div class="image-caption">
+            Pasearemos por zocos, beberemos té a la menta y seguiremos juntos la luz del desierto.
+          </div>
+        </div>
+
+        <p class="final-text">
+          Tu regalo es un <strong>viaje a Marruecos</strong> ✈️🇲🇦
+        </p>
+
         <div class="camel-container">
           <div class="camel">🐪</div>
         </div>
@@ -283,27 +494,61 @@
   </div>
 
 <script>
-  /* --- LÓGICA DEL JUEGO — exactamente la misma que funcionaba bien --- */
-
   let colorsClicked = new Set();
   let lightClicks = 0;
 
   function goToScreen(id) {
-    document.querySelectorAll('.screen')
-      .forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
+
+    // Reiniciar luz cuando entras en la prueba 3
+    if (id === 'screen-test3') {
+      lightClicks = 0;
+      resetLight();
+      document.getElementById('test3-msg').textContent = '';
+    }
+  }
+
+  function openLock(n) {
+    const lock = document.getElementById('lock' + n);
+    if (lock) lock.classList.add('open');
   }
 
   function completeTest(n) {
-    if (n === 1) goToScreen('screen-test2');
-    if (n === 2) goToScreen('screen-test3');
-    if (n === 3) goToScreen('screen-final');
+    if (n === 1) {
+      openLock(1);
+      const msg = document.getElementById('test1-msg');
+      if (msg) msg.textContent = 'El eco del zoco ha reconocido tu elección.';
+      setTimeout(() => goToScreen('screen-test2'), 1000);
+    }
+
+    if (n === 2) {
+      openLock(2);
+      const msg = document.getElementById('test2-msg');
+      if (msg) msg.textContent = 'Los colores de Marruecos brillan a tu favor.';
+      setTimeout(() => goToScreen('screen-test3'), 1000);
+    }
+
+    if (n === 3) {
+      openLock(3);
+      const msg = document.getElementById('test3-msg');
+      if (msg) msg.textContent = 'Has seguido la luz del desierto. La caja se abre...';
+      setTimeout(() => goToScreen('screen-final'), 1300);
+    }
   }
 
   function colorClicked(el) {
-    colorsClicked.add(el.dataset.color);
-    el.classList.add('clicked');
-    if (colorsClicked.size === 3) {
+    const color = el.dataset.color;
+    if (!colorsClicked.has(color)) {
+      colorsClicked.add(color);
+      el.classList.add('clicked');
+    }
+
+    const msg = document.getElementById('test2-msg');
+    if (colorsClicked.size < 3) {
+      if (msg) msg.textContent = 'Sigue tocando los otros colores...';
+    } else {
+      if (msg) msg.textContent = 'Has reunido los colores de Marruecos.';
       setTimeout(() => completeTest(2), 800);
     }
   }
@@ -311,8 +556,9 @@
   function resetLight() {
     const light = document.getElementById('light');
     const area = document.getElementById('desert-area');
-    const r = area.getBoundingClientRect();
+    if (!light || !area) return;
 
+    const r = area.getBoundingClientRect();
     const x = Math.random() * (r.width - 40) + 10;
     const y = Math.random() * (r.height - 40) + 10;
 
@@ -322,14 +568,19 @@
 
   function lightClicked() {
     lightClicks++;
+    const msg = document.getElementById('test3-msg');
+
     if (lightClicks < 3) {
+      if (msg) msg.textContent = `Has seguido la luz ${lightClicks} vez${lightClicks > 1 ? 'es' : ''}…`;
       resetLight();
     } else {
-      completeTest(3);
+      if (msg) msg.textContent = 'La luz se detiene frente a una puerta brillante…';
+      setTimeout(() => completeTest(3), 900);
     }
   }
 
-  resetLight();
+  // Posición inicial de la luz por si se entra directamente
+  window.addEventListener('load', resetLight);
 </script>
 
 </body>
