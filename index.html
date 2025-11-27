@@ -313,44 +313,113 @@
 
     /* DESIERTO */
     .desert-area {
-      margin-top: 14px;
-      border-radius: 18px;
-      height: 200px;
-      background: linear-gradient(to top, #c96f28 0%, #f4a261 40%, #26163b 40%, #1d2a3a 100%);
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(255, 215, 0, 0.25);
-      box-shadow: inset 0 0 25px rgba(0,0,0,0.7);
-    }
+  margin-top: 14px;
+  border-radius: 18px;
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  background: linear-gradient(to top, #b36122 0%, #c67a34 30%, #8b4c2d 55%, #2a1a28 100%);
+  box-shadow: inset 0 0 25px rgba(0,0,0,0.7);
+}
 
-    /* Estrellas suaves de fondo en el desierto */
-    .desert-area::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.7) 0, transparent 40%),
-        radial-gradient(circle at 80% 30%, rgba(255,255,255,0.7) 0, transparent 40%),
-        radial-gradient(circle at 50% 10%, rgba(255,255,255,0.5) 0, transparent 40%);
-      opacity: 0.45;
-      pointer-events: none;
-    }
+/* 🌙 Luna suave */
+.desert-area::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffdf5 0%, #f5ecd2 50%, rgba(255,255,255,0) 70%);
+  opacity: 0.8;
+  filter: blur(1px);
+}
 
-    .light {
-      position: absolute;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #ffe082 0%, #ffc107 40%, rgba(255,193,7,0) 70%);
-      box-shadow: 0 0 12px rgba(255,241,118,0.9);
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 0.8rem;
-      font-weight: bold;
-      color: #4e342e;
-    }
+/* ✨ Estrellas */
+.desert-area::after {
+  content: "✦   ✧   ✦   ✧";
+  position: absolute;
+  top: 0;
+  left: 12px;
+  font-size: 1.3rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 22px;
+  animation: stars-twinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes stars-twinkle {
+  0% { opacity: .45; }
+  100% { opacity: .9; }
+}
+
+/* 🌬 Calima en movimiento */
+.desert-haze {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 120%, rgba(255,225,170,0.25), transparent 70%);
+  animation: haze-move 6s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes haze-move {
+  0% { transform: translateY(5px); opacity: .7; }
+  100% { transform: translateY(-8px); opacity: 1; }
+}
+
+/* 🏜 Dunas onduladas */
+.dune {
+  position: absolute;
+  width: 140%;
+  height: 100px;
+  left: -20%;
+  border-radius: 50%;
+  background: linear-gradient(to right, #e89a4a, #c0742e);
+  opacity: 0.25;
+  filter: blur(4px);
+}
+
+.dune:nth-child(1) {
+  bottom: 10px;
+}
+.dune:nth-child(2) {
+  bottom: 35px;
+  background: linear-gradient(to right, #e8b16a, #c8883b);
+  opacity: 0.2;
+}
+.dune:nth-child(3) {
+  bottom: 55px;
+  background: linear-gradient(to right, #f3c98a, #d8a35a);
+  opacity: 0.15;
+}
+
+/* 🌟 NUEVA LUZ: estrella con halo mágico */
+.light {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff3b0 0%, #ffd95b 30%, rgba(255,200,0,0.1) 70%);
+  box-shadow:
+    0 0 15px rgba(255,240,150,0.9),
+    0 0 40px rgba(255,210,100,0.7),
+    0 0 60px rgba(255,185,75,0.5);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #5d3c11;
+  font-weight: bold;
+  font-size: 0.9rem;
+  animation: light-pulse 2s ease-in-out infinite;
+}
+
+@keyframes light-pulse {
+  0% { transform: scale(0.95); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(0.95); }
+}
 
     /* Caja cerrada estática (antes de abrirse) */
     .closed {
@@ -636,6 +705,11 @@
         </p>
 
         <div class="desert-area" id="desert-area">
+          <div class="dune"></div>
+          <div class="dune"></div>
+          <div class="dune"></div>
+          <div class="desert-haze"></div>
+          
           <div class="light" id="light" onclick="lightClick()">★</div>
         </div>
 
