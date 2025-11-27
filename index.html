@@ -391,25 +391,39 @@
         <p id="msg3" style="margin-top:12px; text-align:center; font-style:italic;"></p>
       </div>
 
-      <!-- 🟢 PANTALLA 6: FINAL -->
-      <div id="screen-final" class="screen">
-        <h2>La Caja se Abre</h2>
-        <div class="zellige-line"></div>
+    <!-- 🟢 PANTALLA 6: FINAL -->
+<div id="screen-final" class="screen">
 
-        <div class="final-box">
-          <div class="card-fly">Viaje a<br>Marruecos</div>
-        </div>
+  <h2>La Caja se Abre</h2>
+  <div class="zellige-line"></div>
 
-        <div class="camel-container">
-          <div class="camel">🐪</div>
-        </div>
+  <div class="reveal-glow"></div>
 
-        <p style="text-align:center; margin-top:20px; font-style:italic; font-size:1.2rem;">
-          “El verdadero destino no se revela… se siente.”
-        </p>
+  <div class="final-box">
+      <div class="lid"></div>
 
-        <button class="btn" onclick="restart()">Ver la sorpresa de nuevo</button>
+      <!-- TARJETA FÍSICA QUE SE ELEVA -->
+      <div class="card-fly">Viaje a<br>Marruecos</div>
+
+      <div class="final-card-text" style="position:relative; z-index:5; margin-top:20px; text-align:center;">
+          <h2 style="margin-bottom:6px;">🎉 ¡Feliz cumpleaños! 🎉</h2>
+          <p>Dentro de la caja encuentras una sorpresa:</p>
+          <p style="font-weight:700; margin-top:6px; font-size:1.3rem;">
+              🧳 Un viaje a Marruecos 🧳
+          </p>
+          <p class="small" style="font-style:italic;">
+              “Quien sigue la luz del desierto merece descubrir nuevos horizontes.”
+          </p>
       </div>
+  </div>
+
+  <div class="camel-container">
+      <div class="camel">🐪</div>
+  </div>
+
+  <button class="btn" onclick="restart()">Ver la sorpresa de nuevo</button>
+</div>
+
 
     </div>
   </div>
@@ -506,13 +520,25 @@ function lightClick(){
 
 /* --- FINAL: REINICIAR ANIMACIONES --- */
 function resetAnimations(){
-  document.querySelectorAll('.card-fly, .final-box, .camel')
-  .forEach(el=>{
-    el.style.animation="none";
-    void el.offsetWidth;
-    el.style.animation="";
+  const screen = document.getElementById("screen-final");
+  const toReset = [
+    ".final-box",
+    ".lid",
+    ".card-fly",
+    ".reveal-glow",
+    ".camel"
+  ];
+
+  toReset.forEach(sel => {
+    const el = screen.querySelector(sel);
+    if(el){
+      el.style.animation = "none";
+      void el.offsetWidth; // reinicia animación
+      el.style.animation = "";
+    }
   });
 }
+
 
 /* --- REINICIAR JUEGO COMPLETO --- */
 function restart(){
@@ -532,3 +558,73 @@ function restart(){
 
 </body>
 </html>
+
+/* TAPA DE LA CAJA */
+.lid {
+  position: absolute;
+  width: 120%;
+  height: 50%;
+  top: 0;
+  left: -10%;
+  background: linear-gradient(135deg, #e4c88f, #c19a56);
+  border-bottom: 3px solid #7a5a32;
+  border-radius: 14px;
+  transform-origin: top;
+  transform: rotateX(0deg);
+  animation: lid-open 1.8s ease forwards;
+  animation-delay: 0.4s;
+}
+
+@keyframes lid-open {
+  0% { transform: rotateX(0deg); }
+  100% { transform: rotateX(75deg) translateY(-8px); }
+}
+
+/* BRILLO REVELADOR */
+.reveal-glow {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center,
+    rgba(255, 220, 120, 0.25),
+    rgba(255, 220, 120, 0.15),
+    transparent 70%
+  );
+  pointer-events: none;
+  opacity: 0;
+  animation: glow-reveal 2.8s ease forwards;
+}
+
+@keyframes glow-reveal {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+/* TEXTO INTERNO DE LA CAJA */
+.final-card-text h2, 
+.final-card-text p {
+  color: #3b2714;
+}
+
+/* Animación de aparición de caja */
+.final-box {
+  position: relative;
+  max-width: 260px;
+  padding: 16px;
+  background: linear-gradient(135deg, #f9f0d7, #f5e1a4);
+  color: #3b2714;
+  text-align: center;
+  border-radius: 18px;
+  border: 1px solid rgba(121, 85, 72, 0.4);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+  overflow: hidden;
+  transform: scale(0.9);
+  opacity: 0;
+  animation: box-appear 1.2s ease forwards;
+}
+
+@keyframes box-appear {
+  0% { transform: scale(0.7); opacity: 0; filter: brightness(0.5); }
+  70% { transform: scale(1.03); opacity: 1; filter: brightness(1.4); }
+  100% { transform: scale(1); opacity: 1; filter: brightness(1); }
+}
