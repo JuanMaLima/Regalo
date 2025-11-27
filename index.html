@@ -457,17 +457,24 @@
 
     /* FINAL: Caja mística dorada + luz interior */
     .final-box {
-      margin: 16px auto;
-      width: 260px;
-      height: 180px;
-      background: radial-gradient(circle at top, #ffefc2 0%, #f5e4b0 35%, #d2a85f 100%);
-      border-radius: 14px;
-      border: 3px solid #b58a3c;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 0 22px rgba(255,215,0,0.45);
-      transform-origin: top;
-      animation: box-open 1.2s ease-out forwards;
+  margin: 16px auto;
+  width: 260px;
+  height: 180px;
+  padding-top: 25px;  /* <--- ESTO HACE QUE EL TEXTO SUBA */
+  display: flex;
+  justify-content: flex-start; /* Coloca contenido arriba */
+  align-items: center;
+  flex-direction: column;
+  background: #f5e4b0;
+  border-radius: 14px;
+  border: 3px solid #b58a3c;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 18px rgba(255,215,0,0.3);
+  transform-origin: top;
+  animation: box-open 1.5s ease-out forwards;
+}
+
     }
 
     @keyframes box-open {
