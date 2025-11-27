@@ -353,11 +353,11 @@
 
       <!-- 🟡 PANTALLA 4: PRUEBA 2 -->
       <div id="screen-test2" class="screen">
-        <h2>Prueba 2: Los Colores de Marruecos</h2>
+        <h2>Prueba 2: Los Colores Son Historia</h2>
         <div class="zellige-line"></div>
 
         <p>
-          Toca los tres colores. Cada uno esconde un fragmento de la historia de Marruecos.
+          Toca los tres colores. Cada uno esconde un fragmento de la historia.
         </p>
 
         <div class="colors-row">
@@ -470,7 +470,7 @@ function colorClick(el){
   if(colors.size === 3){
     setTimeout(()=>{
       document.getElementById("msg2").textContent =
-      "“Has unido los colores del alma marroquí.”";
+      "“Has unido los colores de la historia”";
       setTimeout(()=>goTo('screen-test3'),3000);
     },300);
   }
