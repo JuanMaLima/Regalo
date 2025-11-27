@@ -375,11 +375,11 @@
 
       <!-- 🟡 PANTALLA 4: PRUEBA 2 -->
       <div id="screen-test2" class="screen">
-        <h2>Prueba 2: Los Colores de Marruecos</h2>
+        <h2>Prueba 2: Los Colores de la Historia</h2>
         <div class="zellige-line"></div>
 
         <p>
-          Toca los tres colores. Cada uno esconde un fragmento de la historia de Marruecos.
+          Toca los tres colores. Cada uno esconde un fragmento de la historia.
         </p>
 
         <div class="colors-row">
@@ -416,7 +416,7 @@
       <!-- 🟢 PANTALLA 6: FINAL -->
 <div id="screen-final" class="screen">
 
-  <h2>El Mercader Habla</h2>
+  <h2>El Mercader Tiene Algo Que Decirte...</h2>
   <div class="zellige-line"></div>
 
   <p style="font-style:italic; text-align:center; margin-bottom:16px;">
@@ -520,7 +520,7 @@ function test1(el){
 
   document.getElementById("msg1").textContent = frase;
 
-  setTimeout(()=>goTo('screen-test2'), 1700);
+  setTimeout(()=>goTo('screen-test2'), 3000);
 }
 
 /* --- PRUEBA 2: COLORES --- */
@@ -550,7 +550,7 @@ function colorClick(el){
     setTimeout(()=>{
       document.getElementById("msg2").textContent =
       "“Has unido los colores del alma marroquí.”";
-      setTimeout(()=>goTo('screen-test3'),1200);
+      setTimeout(()=>goTo('screen-test3'),3000);
     },600);
   }
 }
@@ -579,7 +579,7 @@ function lightClick(){
   } else {
     document.getElementById("msg3").textContent =
       "“La luz te guía al destino final…”";
-    setTimeout(()=>goTo('screen-final'), 1500);
+    setTimeout(()=>goTo('screen-final'), 3000);
   }
 }
 
