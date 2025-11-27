@@ -441,9 +441,10 @@
       overflow: hidden;
     }
     #closed-box {
-      margin-top: -4px !important;   /* SUBE la caja */
-      margin-bottom: 12px !important;
-    }
+      position: relative !important;
+      top: -26px !important; /* Súbela más o menos ajustando este valor */
+      margin-top: 0 !important;   /* Para evitar que el margin-top previo interfiera */
+}
 
     .lid-static {
       position: absolute;
