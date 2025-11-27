@@ -441,7 +441,7 @@ function test1(el){
 
   document.getElementById("msg1").textContent = frase;
 
-  setTimeout(()=>goTo('screen-test2'), 3000);
+  setTimeout(()=>goTo('screen-test2'), 1700);
 }
 
 /* --- PRUEBA 2: COLORES --- */
@@ -471,7 +471,7 @@ function colorClick(el){
     setTimeout(()=>{
       document.getElementById("msg2").textContent =
       "“Has unido los colores del alma marroquí.”";
-      setTimeout(()=>goTo('screen-test3'),3000);
+      setTimeout(()=>goTo('screen-test3'),1200);
     },600);
   }
 }
@@ -500,7 +500,7 @@ function lightClick(){
   } else {
     document.getElementById("msg3").textContent =
       "“La luz te guía al destino final…”";
-    setTimeout(()=>goTo('screen-final'), 3000);
+    setTimeout(()=>goTo('screen-final'), 1500);
   }
 }
 
