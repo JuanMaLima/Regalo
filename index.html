@@ -422,23 +422,24 @@
     }
 
     .final-box {
-      margin: 16px auto;
-      width: 260px;
-      height: 180px;
-      padding-top: 25px;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      flex-direction: column;
-      background: #f5e4b0;
-      border-radius: 14px;
-      border: 3px solid #b58a3c;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 0 18px rgba(255,215,0,0.3);
-      transform-origin: top;
-      animation: box-open 1.5s ease-out forwards;
-    }
+  margin: 0 auto;
+  width: 260px;
+  height: auto;                 /* Se adapta al contenido */
+  padding: 0;                   /* Sin caja amarilla */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background: transparent !important;     /* 🚀 Caja abierta SIN fondo */
+  border: none !important;                /* 🚀 Sin marco */
+  box-shadow: none !important;            /* 🚀 Sin sombra de caja */
+
+  position: relative;
+  overflow: visible;                      /* Permite ver las estrellas */
+  transform-origin: top;
+  animation: box-open 1.5s ease-out forwards;
+}
 
     @keyframes box-open {
       0% { transform: rotateX(90deg); opacity: 0; }
