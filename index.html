@@ -422,21 +422,20 @@
     }
 
     .final-box {
-  margin: 0 auto;
+  margin: 16px auto;
   width: 260px;
-  height: auto;                 /* Se adapta al contenido */
-  padding: 0;                   /* Sin caja amarilla */
+  height: 180px;
+  padding-top: 25px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-
-  background: transparent !important;     /* 🚀 Caja abierta SIN fondo */
-  border: none !important;                /* 🚀 Sin marco */
-  box-shadow: none !important;            /* 🚀 Sin sombra de caja */
-
+  background: #f5e4b0;         /* <-- este es el “cuadrado amarillo” */
+  border-radius: 14px;
+  border: 3px solid #b58a3c;
   position: relative;
-  overflow: visible;                      /* Permite ver las estrellas */
+  overflow: hidden;
+  box-shadow: 0 0 18px rgba(255,215,0,0.3);
   transform-origin: top;
   animation: box-open 1.5s ease-out forwards;
 }
